@@ -1,0 +1,29 @@
+import pandas as pd
+from datetime import datetime, timedelta
+import random
+
+# Sample product sales data
+products = ['Laptop', 'Monitor', 'Keyboard', 'Mouse', 'Printer']
+data = []
+
+for _ in range(20):
+    product = random.choice(products)
+    quantity = random.randint(1, 10)
+    price = round(random.uniform(50, 1200), 2)
+    total = quantity * price
+    date = datetime.today() - timedelta(days=random.randint(1, 30))
+    data.append({
+        "Date": date.strftime('%Y-%m-%d'),
+        "Product": product,
+        "Quantity": quantity,
+        "Unit Price": price,
+        "Total": total
+    })
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Write to Excel
+df.to_excel("sales_report.xlsx", index=False)
+
+print("✅ Excel file 'sales_report.xlsx' created!")
